@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:layout_margin="16dp"
+    android:useDefaultMargins="true"
+    tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:text="Throttle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?attr/colorAccent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_columnSpan="3" />
+
+    <TextView
+        android:text="@string/button"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="DOWN" />
+
+    <TextView
+        android:layout_marginTop="32dp"
+        android:text="LEDs"
+        android:textColor="?attr/colorAccent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_columnSpan="3"/>
+
+    <TextView
+        android:text="Red"
+        android:layout_columnSpan="3"/>
+
+    <Button
+        android:id="@+id/red_on"
+        android:text="on" />
+
+    <Button
+        android:id="@+id/red_off"
+        android:text="off" />
+
+    <Button
+        android:id="@+id/red_flash"
+        android:text="flash" />
+
+    <TextView
+        android:text="Green"
+        android:layout_columnSpan="3"/>
+
+    <Button
+        android:id="@+id/green_on"
+        android:text="on" />
+
+    <Button
+        android:id="@+id/green_off"
+        android:text="off" />
+
+    <Button
+        android:id="@+id/green_flash"
+        android:text="flash" />
+
+</GridLayout>
