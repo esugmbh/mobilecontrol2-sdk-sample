@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.mobilecontrol2.sdk"
-        minSdkVersion 16
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'eu.esu.mobilecontrol2:sdk:+'
+    compile 'eu.esu.mobilecontrol2:sdk:1.0+'
+    compile 'com.android.support:gridlayout-v7:21.0.0'
     compile 'com.android.support:appcompat-v7:21.0.3'
 }

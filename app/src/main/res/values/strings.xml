@@ -3,5 +3,12 @@
 
     <string name="app_name">Mobile Control II SDK Sample</string>
     <string name="button">Button:</string>
+    <string name="throttle">Throttle</string>
+    <string name="leds">LEDs</string>
+    <string name="red">Red</string>
+    <string name="on">on</string>
+    <string name="off">off</string>
+    <string name="flash">flash</string>
+    <string name="green">Green</string>
 
 </resources>

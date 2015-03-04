@@ -8,6 +8,7 @@
 package com.example.mobilecontrol2.sdk;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,7 +22,7 @@ import eu.esu.mobilecontrol2.sdk.ThrottleFragment;
 /**
  * This class demonstrates how to use the Mobile Control II hardware features.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
 
     private SeekBar mSeekBar;
     private TextView mThrottleButtonState;

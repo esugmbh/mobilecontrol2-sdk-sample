@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="3"
-    android:layout_margin="16dp"
-    android:useDefaultMargins="true"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    app:columnCount="3"
+    app:useDefaultMargins="true"
     tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_columnSpan="3"
-        android:text="Throttle"
+        android:text="@string/throttle"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?attr/colorAccent" />
+        android:textColor="?attr/colorAccent"
+        app:layout_columnSpan="3" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -22,13 +26,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:layout_marginTop="4dp"
-        android:layout_columnSpan="3" />
+        app:layout_columnSpan="3" />
 
     <TextView
         android:text="@string/button"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Space/>
+    <android.support.v7.widget.Space />
 
     <TextView
         android:id="@+id/textView"
@@ -37,41 +41,41 @@
 
     <TextView
         android:layout_marginTop="32dp"
-        android:text="LEDs"
-        android:textColor="?attr/colorAccent"
+        android:text="@string/leds"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_columnSpan="3"/>
+        android:textColor="?attr/colorAccent"
+        app:layout_columnSpan="3" />
 
     <TextView
-        android:text="Red"
-        android:layout_columnSpan="3"/>
+        android:text="@string/red"
+        app:layout_columnSpan="3" />
 
     <Button
         android:id="@+id/red_on"
-        android:text="on" />
+        android:text="@string/on" />
 
     <Button
         android:id="@+id/red_off"
-        android:text="off" />
+        android:text="@string/off" />
 
     <Button
         android:id="@+id/red_flash"
-        android:text="flash" />
+        android:text="@string/flash" />
 
     <TextView
-        android:text="Green"
-        android:layout_columnSpan="3"/>
+        android:text="@string/green"
+        app:layout_columnSpan="3" />
 
     <Button
         android:id="@+id/green_on"
-        android:text="on" />
+        android:text="@string/on" />
 
     <Button
         android:id="@+id/green_off"
-        android:text="off" />
+        android:text="@string/off" />
 
     <Button
         android:id="@+id/green_flash"
-        android:text="flash" />
+        android:text="@string/flash" />
 
-</GridLayout>
+</android.support.v7.widget.GridLayout>
