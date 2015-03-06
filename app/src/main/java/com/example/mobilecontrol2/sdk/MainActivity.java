@@ -12,20 +12,28 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.esu.mobilecontrol2.sdk.MobileControl2;
 import eu.esu.mobilecontrol2.sdk.OnThrottleListener;
 import eu.esu.mobilecontrol2.sdk.ThrottleFragment;
+import eu.esu.mobilecontrol2.sdk.ThrottleScale;
 
 /**
  * This class demonstrates how to use the Mobile Control II hardware features.
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     private SeekBar mSeekBar;
+    private TextView mThrottlePosition;
+    private TextView mThrottleStep;
     private TextView mThrottleButtonState;
+
+    private ThrottleScale mThrottleScale = new ThrottleScale(10, 15);
 
     /**
      * The fragment that interacts with the Mobile Control II Throttle service.
@@ -48,7 +56,8 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onPositionChanged(int position) {
-            mSeekBar.setProgress(position);
+            mSeekBar.setProgress(mThrottleScale.positionToStep(position));
+            mThrottlePosition.setText(Integer.toString(position));
         }
     };
 
@@ -56,9 +65,14 @@ public class MainActivity extends FragmentActivity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             // Don't move throttle when changed from the motor event.
+            int position = mThrottleScale.stepToPosition(progress);
+
             if (fromUser) {
-                mThrottleFragment.moveThrottle(progress);
+                mThrottleFragment.moveThrottle(position);
+                mThrottlePosition.setText(Integer.toString(position));
             }
+
+            mThrottleStep.setText(Integer.toString(progress));
         }
 
         @Override
@@ -98,6 +112,30 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };
+    private AdapterView.OnItemSelectedListener mOnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            switch (position) {
+                case 0:
+                    mThrottleScale = new ThrottleScale(10, 15);
+                    mSeekBar.setMax(14);
+                    break;
+                case 1:
+                    mThrottleScale = new ThrottleScale(10, 29);
+                    mSeekBar.setMax(28);
+                    break;
+                case 2:
+                    mThrottleScale = new ThrottleScale(10, 127);
+                    mSeekBar.setMax(126);
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,20 +144,29 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         // To use the throttle just add the fragment to the activity.
-        mThrottleFragment = ThrottleFragment.newInstance();
+        mThrottleFragment = ThrottleFragment.newInstance(1);
         mThrottleFragment.setOnThrottleListener(mOnThrottleListener);
         getSupportFragmentManager().beginTransaction()
                 .add(mThrottleFragment, "mc2:throttle")
                 .commit();
 
         // Set up views
-        mSeekBar = (SeekBar) findViewById(R.id.seekBar);
-        mSeekBar.setMax(126); // Set the throttle range.
+        mSeekBar = (SeekBar) findViewById(R.id.seek_bar);
+        mSeekBar.setMax(14); // Maximum of mThrottleScale
         mSeekBar.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
 
-        mThrottleButtonState = (TextView) findViewById(R.id.textView);
+        mThrottlePosition = (TextView) findViewById(R.id.text_position);
+        mThrottlePosition.setText("0");
+
+        mThrottleStep = (TextView) findViewById(R.id.text_step);
+        mThrottlePosition.setText("0");
+
+        mThrottleButtonState = (TextView) findViewById(R.id.text_button);
         // Set text to default value. We will receive MSG_BUTTON_DOWN if the value changed.
         mThrottleButtonState.setText("UP");
+
+        Spinner spinnerSteps = (Spinner) findViewById(R.id.spinner_steps);
+        spinnerSteps.setOnItemSelectedListener(mOnItemSelectedListener);
 
         findViewById(R.id.red_on).setOnClickListener(mOnLedButtonClickListener);
         findViewById(R.id.red_off).setOnClickListener(mOnLedButtonClickListener);

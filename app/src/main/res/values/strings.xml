@@ -10,5 +10,8 @@
     <string name="off">off</string>
     <string name="flash">flash</string>
     <string name="green">Green</string>
+    <string name="position">Position</string>
+    <string name="speed_step">Speed step</string>
+    <string name="speed_steps">Speed steps</string>
 
 </resources>

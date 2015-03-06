@@ -1,81 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    app:columnCount="3"
-    app:useDefaultMargins="true"
-    tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
+    android:layout_marginTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/throttle"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?attr/colorAccent"
-        app:layout_columnSpan="3" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="4dp"
-        app:layout_columnSpan="3" />
+        tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
 
-    <TextView
-        android:text="@string/button"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/header_throttle"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/throttle"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/colorAccent" />
 
-    <android.support.v7.widget.Space />
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_below="@+id/header_throttle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="DOWN" />
+        <TextView
+            android:id="@+id/header_position"
+            android:text="@string/position"
+            android:layout_below="@id/seek_bar"
+            android:layout_alignParentLeft="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_margin="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_marginTop="32dp"
-        android:text="@string/leds"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?attr/colorAccent"
-        app:layout_columnSpan="3" />
+        <TextView
+            android:id="@+id/text_position"
+            android:layout_alignBaseline="@id/header_position"
+            android:layout_alignParentRight="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="255"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:text="@string/red"
-        app:layout_columnSpan="3" />
+        <TextView
+            android:layout_below="@id/header_position"
+            android:id="@+id/header_speed_step"
+            android:text="@string/speed_step"
+            android:layout_margin="4dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/red_on"
-        android:text="@string/on" />
+        <TextView
+            android:id="@+id/text_step"
+            android:layout_alignBaseline="@+id/header_speed_step"
+            android:layout_alignParentRight="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/red_off"
-        android:text="@string/off" />
+        <TextView
+            android:id="@+id/header_button"
+            android:text="@string/button"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/header_speed_step"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/red_flash"
-        android:text="@string/flash" />
+        <TextView
+            android:id="@+id/text_button"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignBaseline="@id/header_button"
+            android:layout_alignParentRight="true"
+            tools:text="DOWN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:text="@string/green"
-        app:layout_columnSpan="3" />
+        <TextView
+            android:id="@+id/header_speed_steps"
+            android:text="@string/speed_steps"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/header_button"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/green_on"
-        android:text="@string/on" />
+        <Spinner
+            android:id="@+id/spinner_steps"
+            android:layout_margin="4dp"
+            android:layout_below="@id/header_speed_steps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/speed_steps"/>
 
-    <Button
-        android:id="@+id/green_off"
-        android:text="@string/off" />
+        <TextView
+            android:id="@+id/header_leds"
+            android:layout_below="@id/spinner_steps"
+            android:layout_margin="4dp"
+            android:text="@string/leds"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/green_flash"
-        android:text="@string/flash" />
+        <TextView
+            android:id="@+id/header_red_leds"
+            android:layout_below="@+id/header_leds"
+            android:layout_margin="4dp"
+            android:text="@string/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-</android.support.v7.widget.GridLayout>
+        <LinearLayout
+            android:id="@+id/layout_red_leds"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_red_leds"
+            android:layout_alignRight="@+id/text_step"
+            android:layout_alignEnd="@+id/text_step">
+
+            <Button
+                android:id="@+id/red_on"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/on" />
+
+            <Button
+                android:id="@+id/red_off"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/off" />
+
+            <Button
+                android:id="@+id/red_flash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/flash" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_below="@+id/layout_red_leds"
+            android:layout_margin="4dp"
+            android:text="@string/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/header_green_leds" />
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_green_leds"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:id="@+id/green_on"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/on" />
+
+            <Button
+                android:id="@+id/green_off"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/off" />
+
+            <Button
+                android:id="@+id/green_flash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/flash" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
