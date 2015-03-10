@@ -180,16 +180,16 @@ public class MainActivity extends ActionBarActivity {
             case ThrottleFragment.KEYCODE_THROTTLE_WAKEUP:
                 // Always ignore the wake up key. You must return true here to avoid further input key handling.
                 return true;
-            case MobileControl2.KEY_CODE_LEFT_TOP:
+            case MobileControl2.KEYCODE_TOP_LEFT:
                 showMessage("Top left");
                 return true;
-            case MobileControl2.KEY_CODE_LEFT_BOTTOM:
+            case MobileControl2.KEYCODE_BOTTOM_LEFT:
                 showMessage("Bottom left");
                 return true;
-            case MobileControl2.KEY_CODE_RIGHT_TOP:
+            case MobileControl2.KEYCODE_TOP_RIGHT:
                 showMessage("Top right");
                 return true;
-            case MobileControl2.KEY_CODE_RIGHT_BOTTOM:
+            case MobileControl2.KEYCODE_BOTTOM_RIGHT:
                 showMessage("Bottom right");
                 return true;
             case MobileControl2.KEYCODE_STOP:
