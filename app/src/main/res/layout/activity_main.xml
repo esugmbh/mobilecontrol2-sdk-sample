@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015 ESU electronic solutions ulm GmbH & Co KG
   ~
   ~ This software may be modified and distributed under the terms
@@ -13,192 +12,174 @@
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin">
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context="com.example.mobilecontrol2.throttle.ThrottleActivity">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/header_throttle"
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/throttle"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="?attr/colorAccent" />
+        <TableRow>
 
-        <SeekBar
-            android:id="@+id/seek_bar"
-            android:layout_below="@+id/header_throttle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp" />
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/throttle"
+                style="@style/heading" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/header_position"
-            android:text="@string/position"
-            android:layout_below="@id/seek_bar"
-            android:layout_alignParentLeft="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_margin="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableRow>
 
-        <TextView
-            android:id="@+id/text_position"
-            android:layout_alignBaseline="@id/header_position"
-            android:layout_alignParentRight="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            tools:text="255"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+        </TableRow>
 
-        <TextView
-            android:layout_below="@id/header_position"
-            android:id="@+id/header_speed_step"
-            android:text="@string/speed_step"
-            android:layout_margin="4dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableRow style="@style/defaultRowStyle">
 
-        <TextView
-            android:id="@+id/text_step"
-            android:layout_alignBaseline="@+id/header_speed_step"
-            android:layout_alignParentRight="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            tools:text="14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/position"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/header_button"
-            android:text="@string/button"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_below="@+id/header_speed_step"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/text_position"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="end"
+                tools:text="255" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/text_button"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignBaseline="@id/header_button"
-            android:layout_alignParentRight="true"
-            tools:text="DOWN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableRow style="@style/defaultRowStyle">
 
-        <TextView
-            android:id="@+id/header_speed_steps"
-            android:text="@string/speed_steps"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_below="@+id/header_button"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/header_speed_step"
+                android:text="@string/speed_step"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Spinner
-            android:id="@+id/spinner_steps"
-            android:layout_margin="4dp"
-            android:layout_below="@id/header_speed_steps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:entries="@array/speed_steps"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/text_step"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="end"
+                tools:text="14" />
 
-        <TextView
-            android:id="@+id/header_leds"
-            android:layout_below="@id/spinner_steps"
-            android:layout_margin="4dp"
-            android:text="@string/leds"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="?attr/colorAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/header_red_leds"
-            android:layout_below="@+id/header_leds"
-            android:layout_margin="4dp"
-            android:text="@string/red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableRow>
 
-        <LinearLayout
-            android:id="@+id/layout_red_leds"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header_red_leds"
-            android:layout_alignRight="@+id/text_step"
-            android:layout_alignEnd="@+id/text_step">
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/button"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/text_button"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="end"
+                tools:text="DOWN" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/header_speed_steps"
+                android:text="@string/speed_steps"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinner_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/speed_steps" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/header_stop"
+                android:text="@string/stop"
+                style="@style/heading" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/stop"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="end"
+                android:id="@+id/text_stop"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:text="DOWN" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/leds"
+                style="@style/heading" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+
+            <TextView
+                android:text="@string/red"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </TableRow>
+
+        <TableRow>
 
             <Button
                 android:id="@+id/red_on"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/on" />
 
             <Button
                 android:id="@+id/red_off"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/off" />
 
             <Button
                 android:id="@+id/red_flash"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/flash" />
-        </LinearLayout>
+        </TableRow>
 
+        <TableRow>
 
-        <TextView
-            android:layout_below="@+id/layout_red_leds"
-            android:layout_margin="4dp"
-            android:text="@string/green"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/header_green_leds" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/green"
+                style="@style/defaultRowStyle" />
+        </TableRow>
 
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header_green_leds"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+        <TableRow>
 
             <Button
                 android:id="@+id/green_on"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/on" />
 
             <Button
                 android:id="@+id/green_off"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/off" />
 
             <Button
                 android:id="@+id/green_flash"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/flash" />
-        </LinearLayout>
+        </TableRow>
 
-    </RelativeLayout>
+    </TableLayout>
 </ScrollView>

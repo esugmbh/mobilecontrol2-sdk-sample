@@ -9,7 +9,7 @@
 <resources>
 
     <string name="app_name">Mobile Control II SDK Sample</string>
-    <string name="button">Button:</string>
+    <string name="button">Button</string>
     <string name="throttle">Throttle</string>
     <string name="leds">LEDs</string>
     <string name="red">Red</string>
@@ -20,5 +20,6 @@
     <string name="position">Position</string>
     <string name="speed_step">Speed step</string>
     <string name="speed_steps">Speed steps</string>
+    <string name="stop">Stop</string>
 
 </resources>

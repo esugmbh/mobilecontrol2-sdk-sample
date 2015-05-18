@@ -8,7 +8,7 @@
 package com.example.mobilecontrol2.sdk;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,19 +17,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import eu.esu.mobilecontrol2.sdk.MobileControl2;
-import eu.esu.mobilecontrol2.sdk.OnThrottleListener;
+import eu.esu.mobilecontrol2.sdk.StopButtonFragment;
 import eu.esu.mobilecontrol2.sdk.ThrottleFragment;
 import eu.esu.mobilecontrol2.sdk.ThrottleScale;
 
 /**
- * This class demonstrates how to use the Mobile Control II hardware features.
+ * This class demonstrates how to use the Mobile Control II hardware.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private SeekBar mSeekBar;
     private TextView mThrottlePosition;
     private TextView mThrottleStep;
     private TextView mThrottleButtonState;
+    private TextView mStopButtonState;
 
     private ThrottleScale mThrottleScale = new ThrottleScale(10, 15);
 
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     /**
      * Callback interface for throttle events.
      */
-    private OnThrottleListener mOnThrottleListener = new OnThrottleListener() {
+    private ThrottleFragment.OnThrottleListener mOnThrottleListener = new ThrottleFragment.OnThrottleListener() {
         @Override
         public void onButtonDown() {
             mThrottleButtonState.setText("DOWN");
@@ -59,10 +60,25 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
+    /**
+     * Callback interface for the stop button.
+     */
+    private StopButtonFragment.OnStopButtonListener mOnStopButtonListener = new StopButtonFragment.OnStopButtonListener() {
+        @Override
+        public void onStopButtonDown() {
+            mStopButtonState.setText("DOWN");
+        }
+
+        @Override
+        public void onStopButtonUp() {
+            mStopButtonState.setText("UP");
+        }
+    };
+
     private SeekBar.OnSeekBarChangeListener mOnSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            // Don't move throttle when changed from the motor event.
+            // Don't move throttle when changed from motor event.
             int position = mThrottleScale.stepToPosition(progress);
 
             if (fromUser) {
@@ -110,6 +126,7 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     };
+
     private AdapterView.OnItemSelectedListener mOnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -136,6 +153,29 @@ public class MainActivity extends ActionBarActivity {
     };
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case ThrottleFragment.KEYCODE_THROTTLE_WAKEUP:
+                // Ignore the wake up key. You must return true here to avoid further input key handling.
+                return true;
+            case MobileControl2.KEYCODE_TOP_LEFT:
+                showMessage("Top left");
+                return true;
+            case MobileControl2.KEYCODE_BOTTOM_LEFT:
+                showMessage("Bottom left");
+                return true;
+            case MobileControl2.KEYCODE_TOP_RIGHT:
+                showMessage("Top right");
+                return true;
+            case MobileControl2.KEYCODE_BOTTOM_RIGHT:
+                showMessage("Bottom right");
+                return true;
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -144,8 +184,13 @@ public class MainActivity extends ActionBarActivity {
         // To use the throttle just add the fragment to the activity.
         mThrottleFragment = ThrottleFragment.newInstance(1);
         mThrottleFragment.setOnThrottleListener(mOnThrottleListener);
+
+        StopButtonFragment stopButtonFragment = StopButtonFragment.newInstance();
+        stopButtonFragment.setOnStopButtonListener(mOnStopButtonListener);
+
         getSupportFragmentManager().beginTransaction()
                 .add(mThrottleFragment, "mc2:throttle")
+                .add(stopButtonFragment, "mc2:stopKey")
                 .commit();
 
         // Set up views
@@ -163,6 +208,9 @@ public class MainActivity extends ActionBarActivity {
         // Set text to default value. We will receive MSG_BUTTON_DOWN if the value changed.
         mThrottleButtonState.setText("UP");
 
+        mStopButtonState = (TextView) findViewById(R.id.text_stop);
+        mStopButtonState.setText("UP");
+
         Spinner spinnerSteps = (Spinner) findViewById(R.id.spinner_steps);
         spinnerSteps.setOnItemSelectedListener(mOnItemSelectedListener);
 
@@ -172,32 +220,6 @@ public class MainActivity extends ActionBarActivity {
         findViewById(R.id.green_on).setOnClickListener(mOnLedButtonClickListener);
         findViewById(R.id.green_off).setOnClickListener(mOnLedButtonClickListener);
         findViewById(R.id.green_flash).setOnClickListener(mOnLedButtonClickListener);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case ThrottleFragment.KEYCODE_THROTTLE_WAKEUP:
-                // Always ignore the wake up key. You must return true here to avoid further input key handling.
-                return true;
-            case MobileControl2.KEYCODE_TOP_LEFT:
-                showMessage("Top left");
-                return true;
-            case MobileControl2.KEYCODE_BOTTOM_LEFT:
-                showMessage("Bottom left");
-                return true;
-            case MobileControl2.KEYCODE_TOP_RIGHT:
-                showMessage("Top right");
-                return true;
-            case MobileControl2.KEYCODE_BOTTOM_RIGHT:
-                showMessage("Bottom right");
-                return true;
-            case MobileControl2.KEYCODE_STOP:
-                showMessage("STOP");
-                return true;
-            default:
-                return super.onKeyDown(keyCode, event);
-        }
     }
 
     private void showMessage(String text) {
