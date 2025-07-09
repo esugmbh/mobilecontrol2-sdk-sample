@@ -180,6 +180,35 @@
                 android:layout_weight="1"
                 android:text="@string/flash" />
         </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/physical_slider"
+                style="@style/heading" />
+        </TableRow>
+
+        <TableRow>
+
+            <SeekBar
+                android:id="@+id/seek_bar_slider"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+        </TableRow>
+
+        <TableRow style="@style/defaultRowStyle">
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/physical_slider_position"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/slider_position"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="end"
+                tools:text="255" />
+        </TableRow>
 
     </TableLayout>
 </ScrollView>

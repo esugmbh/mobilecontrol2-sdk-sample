@@ -8,7 +8,6 @@
 package com.example.mobilecontrol2.sdk;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +15,9 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import eu.esu.mobilecontrol2.sdk.MobileControl2;
 import eu.esu.mobilecontrol2.sdk.StopButtonFragment;
 import eu.esu.mobilecontrol2.sdk.ThrottleFragment;
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView mThrottleStep;
     private TextView mThrottleButtonState;
     private TextView mStopButtonState;
+
+    private SeekBar mSliderSeekBar;
+    private TextView mSliderPosition;
 
     private ThrottleScale mThrottleScale = new ThrottleScale(10, 15);
 
@@ -57,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         public void onPositionChanged(int position) {
             mSeekBar.setProgress(mThrottleScale.positionToStep(position));
             mThrottlePosition.setText(Integer.toString(position));
+        }
+
+        @Override
+        public void onPhysicalSliderPositionChanged(int position) {
+            mSliderSeekBar.setProgress(position);
+            mSliderPosition.setText(Integer.toString(position));
         }
     };
 
@@ -104,25 +115,18 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener mOnLedButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.red_on:
-                    MobileControl2.setLedState(MobileControl2.LED_RED, true);
-                    break;
-                case R.id.red_off:
-                    MobileControl2.setLedState(MobileControl2.LED_RED, false);
-                    break;
-                case R.id.red_flash:
-                    MobileControl2.setLedState(MobileControl2.LED_RED, 250, 250);
-                    break;
-                case R.id.green_on:
-                    MobileControl2.setLedState(MobileControl2.LED_GREEN, true);
-                    break;
-                case R.id.green_off:
-                    MobileControl2.setLedState(MobileControl2.LED_GREEN, false);
-                    break;
-                case R.id.green_flash:
-                    MobileControl2.setLedState(MobileControl2.LED_GREEN, 250, 250);
-                    break;
+            if (v.getId() == R.id.red_on) {
+                MobileControl2.setLedState(MobileControl2.LED_RED, true);
+            } else if (v.getId() == R.id.red_off) {
+                MobileControl2.setLedState(MobileControl2.LED_RED, false);
+            } else if (v.getId() == R.id.red_flash) {
+                MobileControl2.setLedState(MobileControl2.LED_RED, 250, 250);
+            } else if (v.getId() == R.id.green_on) {
+                MobileControl2.setLedState(MobileControl2.LED_GREEN, true);
+            } else if (v.getId() == R.id.green_off) {
+                MobileControl2.setLedState(MobileControl2.LED_GREEN, false);
+            } else if (v.getId() == R.id.green_flash) {
+                MobileControl2.setLedState(MobileControl2.LED_GREEN, 250, 250);
             }
         }
     };
@@ -220,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.green_on).setOnClickListener(mOnLedButtonClickListener);
         findViewById(R.id.green_off).setOnClickListener(mOnLedButtonClickListener);
         findViewById(R.id.green_flash).setOnClickListener(mOnLedButtonClickListener);
+
+        mSliderSeekBar = findViewById(R.id.seek_bar_slider);
+        mSliderSeekBar.setMax(255);
+        mSliderPosition = findViewById(R.id.slider_position);
     }
 
     private void showMessage(String text) {
